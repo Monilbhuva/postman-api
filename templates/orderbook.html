@@ -1,0 +1,175 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="row">
+    <div class="col-xl-12">
+        <div class="nav-align-top mb-6">
+            <ul class="nav nav-pills mb-4" role="tablist">
+                <li class="nav-item">
+                    <button type="button" class="nav-link active" role="tab" data-bs-toggle="tab"
+                        data-bs-target="#navs-pills-top-pending" aria-controls="navs-pills-top-pending" aria-selected="true">
+                        Pending
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button type="button" class="nav-link" role="tab" data-bs-toggle="tab"
+                        data-bs-target="#navs-pills-top-executed" aria-controls="navs-pills-top-executed"
+                        aria-selected="false">
+                        Executed
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button type="button" class="nav-link" role="tab" data-bs-toggle="tab"
+                        data-bs-target="#navs-pills-top-rejected" aria-controls="navs-pills-top-rejected"
+                        aria-selected="false">
+                        Rejected
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button type="button" class="nav-link" role="tab" data-bs-toggle="tab"
+                        data-bs-target="#navs-pills-top-canceled" aria-controls="navs-pills-top-canceled"
+                        aria-selected="false">
+                        Canceled
+                    </button>
+                </li>
+            </ul>
+
+            <div class="tab-content">
+                <!-- Pending Orders Tab -->
+                <div class="tab-pane fade show active" id="navs-pills-top-pending" role="tabpanel">
+                    {% if pending_orders %}
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Symbol</th>
+                                        <th>Quantity</th>
+                                        <th>Price</th>
+                                        <th>Status</th>
+                                        <th>Order Time</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for order in pending_orders %}
+                                        <tr>
+                                            <td>{{ order.tradingsymbol }}</td>
+                                            <td>{{ order.quantity }}</td>
+                                            <td>₹{{ order.price }}</td>
+                                            <td>{{ order.orderstatus }}</td>
+                                            <td>{{ order.updatetime }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    {% else %}
+                        <div class="alert alert-warning">
+                            <strong>No pending orders.</strong>
+                        </div>
+                    {% endif %}
+                </div>
+
+                <!-- Executed Orders Tab -->
+                <div class="tab-pane fade" id="navs-pills-top-executed" role="tabpanel">
+                    {% if executed_orders %}
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Symbol</th>
+                                        <th>Quantity</th>
+                                        <th>Price</th>
+                                        <th>Transaction Type</th>
+                                        <th>Trade Time</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for trade in executed_orders %}
+                                        <tr>
+                                            <td>{{ trade.tradingsymbol }}</td>
+                                            <td>{{ trade.fillsize }}</td>
+                                            <td>₹{{ trade.fillprice }}</td>
+                                            <td>{{ trade.transactiontype }}</td>
+                                            <td>{{ trade.filltime }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    {% else %}
+                        <div class="alert alert-warning">
+                            <strong>No executed orders.</strong>
+                        </div>
+                    {% endif %}
+                </div>
+
+                <!-- Canceled/Rejected Orders Tab -->
+                <div class="tab-pane fade" id="navs-pills-top-rejected" role="tabpanel">
+                    {% if rejected_orders %}
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Symbol</th>
+                                        <th>Quantity</th>
+                                        <th>Price</th>
+                                        <th>Status</th>
+                                        <th>Order Time</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for order in rejected_orders %}
+                                        <tr>
+                                            <td>{{ order.tradingsymbol }}</td>
+                                            <td>{{ order.quantity }}</td>
+                                            <td>₹{{ order.price }}</td>
+                                            <td>{{ order.orderstatus }}</td>
+                                            <td>{{ order.updatetime }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    {% else %}
+                        <div class="alert alert-warning">
+                            <strong>No rejected orders.</strong>
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="tab-pane fade" id="navs-pills-top-canceled" role="tabpanel">
+                    {% if canceled_orders %}
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Symbol</th>
+                                        <th>Quantity</th>
+                                        <th>Price</th>
+                                        <th>Status</th>
+                                        <th>Order Time</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for order in canceled_orders %}
+                                        <tr>
+                                            <td>{{ order.tradingsymbol }}</td>
+                                            <td>{{ order.quantity }}</td>
+                                            <td>₹{{ order.price }}</td>
+                                            <td>{{ order.orderstatus }}</td>
+                                            <td>{{ order.updatetime }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    {% else %}
+                        <div class="alert alert-warning">
+                            <strong>No canceled orders.</strong>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

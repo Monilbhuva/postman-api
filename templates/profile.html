@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block css %}
+<style>
+    .profile-container {
+        max-width: 600px;
+        margin: 0 auto;
+        background-color: #fff;
+        border-radius: 10px;
+        padding: 20px;
+    }
+
+    .user-details p {
+        font-size: 16px;
+        margin-bottom: 10px;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+    }
+
+    .btn-outline-danger {
+        color: #dc3545;
+        border-color: #dc3545;
+    }
+</style>
+{% endblock %}
+{% block content %}
+<div class="profile-container card shadow-lg p-4 mb-4">
+    <div class="d-flex align-items-center mb-4">
+        <!-- User Profile Image -->
+        <div class="avatar flex-shrink-0 me-3">
+            <img src="/static/img/avatars/avatar.svg" alt="User Avatar" class="rounded-circle" width="80">
+        </div>
+        <div>
+            <h3 class="mb-0">{{ clientData.name }}</h3>
+            <small class="text-muted">ID: {{ clientData.clientcode }}</small>
+        </div>
+    </div>
+
+    <!-- User Details Section -->
+    <div class="user-details">
+        <p><strong>Email:</strong> {{ clientData.email }}</p>
+        <p><strong>Mobile No.:</strong> {{ clientData.mobileno }}</p>
+    </div>
+
+   
+</div>
+
+{% endblock %}

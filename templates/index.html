@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="col-lg-12 col-md-12 order-1">
+  <div class="row">
+    {% for stock in watchList %}
+    <div class="col-lg-3 col-md-12 col-6 mb-6" id="card-{{ stock.symboltoken }}">
+      <div class="card h-100">
+        <div class="card-body">
+          <div class="card-title d-flex align-items-start justify-content-between mb-4">
+            <div class="avatar flex-shrink-0">
+              <img src="/static/img/icons/unicons/chart-success.png" alt="chart success" class="rounded" />
+            </div>
+            <div class="dropdown">
+              <button class="btn p-0" type="button" id="cardOpt3" data-bs-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false">
+                <i class="bx bx-dots-vertical-rounded text-muted"></i>
+              </button>
+              <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt3">
+                <a class="dropdown-item" href="{% url 'stock_search_detail' stock.symboltoken %}">
+                  View More
+                </a>
+                <a class="dropdown-item" href="{% url 'deleteStockINwatchList' stock.symboltoken %}">
+                  Delete
+                </a>
+
+              </div>
+            </div>
+          </div>
+          <h5 class="card-title mb-3">{{ stock.tradingsymbol }}</h5> <!-- Stock name -->
+
+          <!-- Real-time stock price details -->
+          <h6 class="ltp mb-1">LTP: ₹0</h6> <!-- This will be dynamically updated -->
+          <small class="price-difference text-success fw-medium"><i class="bx bx-up-arrow-alt"></i>0%</small>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+<script id="watch-list-data" type="application/json">{{ watchList|json_script:"watch-list-data" }}</script>
+{% endblock %}
+
+
+
+{% block script %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function () {
+
+let watchList = [];
+
+// Function to fetch watchlist from the server
+function fetchWatchList(callback) {
+  $.ajax({
+    url: '{% url "getWatchList" %}',
+    type: 'GET',
+    success: function (data) {
+      watchList = data;
+      callback(watchList);  // Pass the data to a callback function
+    },
+    error: function (error) {
+      console.error('Error fetching watchlist:', error);
+    }
+  });
+}
+
+// Function to fetch LTP for a stock
+function getStockLTP(stock) {
+  $.ajax({
+    url: '{% url "getStockLTP" %}',  // Django URL for fetching LTP data
+    type: 'GET',
+    data: {
+      tradingsymbol: stock.tradingsymbol,
+      symboltoken: stock.symboltoken
+    },
+    success: function (data) {
+      console.log('Stock LTP Data:', data);
+
+      // Assuming the API returns 'ltp' and 'close' fields
+      let priceDifference = data.ltp - data.close;  // Calculate price difference
+      let priceClass = priceDifference < 0 ? 'text-danger' : 'text-success';  // Set class based on price difference
+
+      // Update the corresponding card with live data
+      let cardId = `card-${stock.symboltoken}`;  // Assuming unique card ID for each stock
+      $(`#${cardId} .ltp`).text(`LTP : ₹${data.ltp}`);  // Update LTP
+      $(`#${cardId} .price-difference`).html(`<i class="bx ${priceDifference < 0 ? 'bx-down-arrow-alt' : 'bx-up-arrow-alt'}"></i> ${priceDifference.toFixed(2)} (${((priceDifference / data.close) * 100).toFixed(2)}%)`);
+      $(`#${cardId} .price-difference`).removeClass('text-success text-danger').addClass(priceClass);  // Update price class
+    },
+    error: function (error) {
+      console.error('Error fetching stock LTP:', error);
+    }
+  });
+}
+
+// Function to process and update the watchlist
+function updateWatchList() {
+  watchList.forEach(function (stock) {
+    getStockLTP(stock);  // Fetch LTP for each stock
+  });
+}
+
+// Fetch watchlist and update LTP data initially
+fetchWatchList(function (data) {
+  updateWatchList();  // Update the data after fetching the watchlist
+});
+
+// Set interval to fetch watchlist and update LTP every 5 seconds
+setInterval(function () {
+  fetchWatchList(function (data) {
+    updateWatchList();  // Update the data after re-fetching the watchlist
+  });
+}, 1000);
+
+});
+
+</script>
+
+{% endblock %}

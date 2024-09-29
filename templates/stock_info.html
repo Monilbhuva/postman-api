@@ -1,0 +1,267 @@
+{% extends "base.html" %}
+{% block css %}
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css"> -->
+<style>
+    .stock-info-container {
+        margin: 20px auto;
+        max-width: 800px;
+    }
+
+    .stock-header {
+        background-color: #007bff;
+        color: white;
+        padding: 10px;
+        border-radius: 5px 5px 0 0;
+    }
+
+    .stock-details {
+        background-color: #f8f9fa;
+        border: 1px solid #dee2e6;
+        border-top: none;
+        border-radius: 0 0 5px 5px;
+        padding: 15px;
+    }
+
+    .stock-details table {
+        width: 100%;
+    }
+
+    .stock-details table th,
+    .stock-details table td {
+        padding: 8px 12px;
+    }
+
+    .order-depth {
+        margin-top: 15px;
+    }
+
+    .price-change {
+        font-weight: bold;
+    }
+
+    .positive {
+        color: green;
+    }
+
+    .negative {
+        color: red;
+    }
+</style>
+{% endblock %}
+{% block content %}
+{% load humanize %} <!-- Load humanize template tags -->
+<div class="container stock-info-container">
+    <div class="stock-header text-center">
+        <h3>Stock Quote Information</h3>
+        <p>
+            Exchange: {{ stock_data.exchange }} |
+            Trading Symbol: {{ stock_data.tradingSymbol }} |
+            Symbol Token: {{ stock_data.symbolToken }} |
+            <span class="price-change {% if stock_data.difference < 0 %}negative{% else %}positive{% endif %}">
+                (₹{{ stock_data.difference|floatformat:2 }} / {{ stock_data.percentage_change|floatformat:2 }}%)
+            </span>
+        </p>
+    </div>
+    <div class="stock-details">
+        <div class="stock-details d-flex justify-content-between align-items-center">
+            <h4>Price Details</h4>
+
+            <div>
+                <!-- Add to Watchlist Button -->
+                <a
+                    href="/addWatchlist?tradingSymbol={{ stock_data.tradingSymbol }}&symbolToken={{ stock_data.symbolToken }}">
+                    <button type="submit" class="btn btn-primary btn-sm add-to-watchlist-btn">
+                        Add to Watchlist
+                    </button>
+                </a>
+
+                <!-- Buy Button -->
+                <button type="button" class="btn btn-success btn-sm buy-stock-btn" data-bs-toggle="modal"
+                    data-bs-target="#buyStockModal">
+                    Buy
+                </button>
+            </div>
+        </div>
+        <table class="table table-striped table-bordered">
+            <tr>
+                <th>Last Traded Price (LTP)</th>
+                <td>₹{{ stock_data.ltp }}</td>
+            </tr>
+            <tr>
+                <th>Open</th>
+                <td>₹{{ stock_data.open }}</td>
+            </tr>
+            <tr>
+                <th>High</th>
+                <td>₹{{ stock_data.high }}</td>
+            </tr>
+            <tr>
+                <th>Low</th>
+                <td>₹{{ stock_data.low }}</td>
+            </tr>
+            <tr>
+                <th>Close (Previous Day)</th>
+                <td>₹{{ stock_data.close }}</td>
+            </tr>
+            <tr>
+                <th>Net Change</th>
+                <td>{{ stock_data.netChange }}</td>
+            </tr>
+            <tr>
+                <th>Percent Change</th>
+                <td>{{ stock_data.percentChange }}%</td>
+            </tr>
+            <tr>
+                <th>Average Price</th>
+                <td>₹{{ stock_data.avgPrice }}</td>
+            </tr>
+        </table>
+
+        <h4>Volume & Interest</h4>
+        <table class="table table-striped table-bordered">
+            <tr>
+                <th>Trade Volume</th>
+                <td>{{ stock_data.tradeVolume|intcomma }}</td>
+            </tr>
+            <tr>
+                <th>Open Interest</th>
+                <td>{{ stock_data.opnInterest|intcomma }}</td>
+            </tr>
+        </table>
+
+        <h4>Order Book Depth</h4>
+        <div class="order-depth">
+            <h5>Buy Orders</h5>
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Orders</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for order in stock_data.depth.buy %}
+                    <tr>
+                        <td>₹{{ order.price }}</td>
+                        <td>{{ order.quantity }}</td>
+                        <td>{{ order.orders }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <h5>Sell Orders</h5>
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Orders</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for order in stock_data.depth.sell %}
+                    <tr>
+                        <td>₹{{ order.price }}</td>
+                        <td>{{ order.quantity }}</td>
+                        <td>{{ order.orders }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="buyStockModal" tabindex="-1" aria-labelledby="buyStockModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="buyStockModalLabel">Buy Stock</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="buyStockForm">
+                    <!-- Exchange Selection -->
+                    <!-- <div class="mb-3">
+                        <label for="exchange" class="form-label">Select Exchange</label>
+                        <select class="form-select select2" id="exchange" name="exchange" required>
+                            <option value="" disabled selected>Select Exchange</option>
+                            <option value="NSE">NSE</option>
+                            <option value="BSE">BSE</option>
+                        </select>
+                    </div> -->
+
+                    <!-- <div class="mb-3">
+                        <label for="productType" class="form-label">Product Type</label>
+                        <select class="form-select select2" id="productType" name="productType" required>
+                            <option value="" disabled selected>Select product type</option>
+                            <option value="DELIVERY">DELIVERY</option>
+                            <option value="CARRYFORWARD">CARRYFORWARD</option>
+                            <option value="MARGIN">MARGIN</option>
+                            <option value="INTRADAY">INTRADAY</option>
+                            <option value="BO">BO</option>
+                        </select>
+                    </div> -->
+
+                    <!-- Quantity Input -->
+                    <div class="mb-3">
+                        <label for="quantity" class="form-label">Quantity</label>
+                        <input type="number" class="form-control" id="quantity" name="quantity" min="1" required>
+                    </div>
+
+                    <input type="hidden" id="tradingSymbol" name="tradingSymbol" value="{{ stock_data.tradingSymbol }}">
+                    <input type="hidden" id="symbolToken" name="symbolToken" value="{{ stock_data.symbolToken }}">
+                    <input type="hidden" id="price" name="price" value="{{ stock_data.ltp }}">
+
+                    <button type="submit" class="btn btn-primary">Confirm Buy</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block script %}
+<script>
+    $(document).ready(function () {
+        $('#buyStockForm').on('submit', function (e) {
+            e.preventDefault();
+
+            // Gather form data
+            // let exchange = $('#exchange').val();
+            let quantity = $('#quantity').val();
+            let tradingSymbol = $('#tradingSymbol').val();
+            let symbolToken = $('#symbolToken').val();
+            let price = $('#price').val();
+            // let productType = $('#productType').val();
+            $('#buyStockModal').modal('hide');  // Close modal on success
+
+            // Perform an AJAX request to your backend
+            $.ajax({
+                url: '/buyStock',  // Adjust this URL to your backend buyStock endpoint
+                method: 'POST',
+                data: {
+                    // exchange: exchange,
+                    quantity: quantity,
+                    tradingSymbol: tradingSymbol,
+                    symbolToken: symbolToken,
+                    price: price,
+                    // productType: productType,
+                    csrfmiddlewaretoken: '{{ csrf_token }}' // Add CSRF token for Django forms
+                },
+                success: function (response) {
+                    window.location.replace("{% url 'index' %}");
+                },
+                error: function (error) {
+                    console.error('Error buying stock:', error);
+                    alert('An error occurred while purchasing the stock.');
+                }
+            });
+        });
+    });
+</script>
+{% endblock %}

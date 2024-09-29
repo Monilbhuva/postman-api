@@ -1,0 +1,169 @@
+[E 240927 13:25:39 smartConnect:218] Error occurred while making a POST request to https://apiconnect.angelone.in/rest/auth/angelbroking/user/v1/loginByPassword. Headers: {'Content-type': 'application/json', 'X-ClientLocalIP': '127.0.0.1', 'X-ClientPublicIP': '106.193.147.98', 'X-MACAddress': '28:d2:44:3b:d3:9d', 'Accept': 'application/json', 'X-PrivateKey': 'TJUyGz6L', 'X-UserType': 'USER', 'X-SourceID': 'WEB'}, Request: {'clientcode': 'Svca1072', 'password': '2424', 'totp': '837869'}, Response: HTTPSConnectionPool(host='apiconnect.angelone.in', port=443): Read timed out. (read timeout=7)
+[E 240927 13:28:01 smartConnect:243] Error occurred while making a POST request to https://apiconnect.angelone.in/rest/secure/angelbroking/order/v1/placeOrder. Error: Failed to get symbol details. URL: https://apiconnect.angelone.in/rest/secure/angelbroking/order/v1/placeOrder, Headers: {'Content-type': 'application/json', 'X-ClientLocalIP': '127.0.0.1', 'X-ClientPublicIP': '106.193.147.98', 'X-MACAddress': '28:d2:44:3b:d3:9d', 'Accept': 'application/json', 'X-PrivateKey': 'TJUyGz6L', 'X-UserType': 'USER', 'X-SourceID': 'WEB'}, Request: {'variety': 'NORMAL', 'tradingsymbol': 'SBIN-EQ', 'symboltoken': '3045', 'transactiontype': 'BUY', 'exchange': 'BSE', 'ordertype': 'LIMIT', 'producttype': 'MARGIN', 'duration': 'DAY', 'price': '800.3', 'squareoff': '0', 'stoploss': '0', 'quantity': '2'}, Response: {'message': 'Failed to get symbol details', 'errorcode': 'AB1018', 'status': False, 'data': None}
+[E 240927 13:28:01 smartConnect:336] API request failed: {'message': 'Failed to get symbol details', 'errorcode': 'AB1018', 'status': False, 'data': None}
+[E 240927 13:28:34 smartConnect:243] Error occurred while making a POST request to https://apiconnect.angelone.in/rest/secure/angelbroking/order/v1/placeOrder. Error: Failed to get symbol details. URL: https://apiconnect.angelone.in/rest/secure/angelbroking/order/v1/placeOrder, Headers: {'Content-type': 'application/json', 'X-ClientLocalIP': '127.0.0.1', 'X-ClientPublicIP': '106.193.147.98', 'X-MACAddress': '28:d2:44:3b:d3:9d', 'Accept': 'application/json', 'X-PrivateKey': 'TJUyGz6L', 'X-UserType': 'USER', 'X-SourceID': 'WEB'}, Request: {'variety': 'NORMAL', 'tradingsymbol': 'SBIN-EQ', 'symboltoken': '3045', 'transactiontype': 'BUY', 'exchange': 'BSE', 'ordertype': 'LIMIT', 'producttype': 'INTRADAY', 'duration': 'DAY', 'price': '800.3', 'squareoff': '0', 'stoploss': '0', 'quantity': '2'}, Response: {'message': 'Failed to get symbol details', 'errorcode': 'AB1018', 'status': False, 'data': None}
+[E 240927 13:28:34 smartConnect:336] API request failed: {'message': 'Failed to get symbol details', 'errorcode': 'AB1018', 'status': False, 'data': None}
+[E 240927 13:29:10 smartConnect:243] Error occurred while making a POST request to https://apiconnect.angelone.in/rest/secure/angelbroking/order/v1/placeOrder. Error: Failed to get symbol details. URL: https://apiconnect.angelone.in/rest/secure/angelbroking/order/v1/placeOrder, Headers: {'Content-type': 'application/json', 'X-ClientLocalIP': '127.0.0.1', 'X-ClientPublicIP': '106.193.147.98', 'X-MACAddress': '28:d2:44:3b:d3:9d', 'Accept': 'application/json', 'X-PrivateKey': 'TJUyGz6L', 'X-UserType': 'USER', 'X-SourceID': 'WEB'}, Request: {'variety': 'NORMAL', 'tradingsymbol': 'SBIN-EQ', 'symboltoken': '3045', 'transactiontype': 'BUY', 'exchange': 'BSE', 'ordertype': 'LIMIT', 'producttype': 'INTRADAY', 'duration': 'DAY', 'price': '800.3', 'squareoff': '0', 'stoploss': '0', 'quantity': '2'}, Response: {'message': 'Failed to get symbol details', 'errorcode': 'AB1018', 'status': False, 'data': None}
+[E 240927 13:29:10 smartConnect:336] API request failed: {'message': 'Failed to get symbol details', 'errorcode': 'AB1018', 'status': False, 'data': None}
+[E 240927 13:30:43 smartConnect:218] Error occurred while making a POST request to https://apiconnect.angelone.in/rest/auth/angelbroking/user/v1/loginByPassword. Headers: {'Content-type': 'application/json', 'X-ClientLocalIP': '127.0.0.1', 'X-ClientPublicIP': '106.193.147.98', 'X-MACAddress': '28:d2:44:3b:d3:9d', 'Accept': 'application/json', 'X-PrivateKey': 'TJUyGz6L', 'X-UserType': 'USER', 'X-SourceID': 'WEB'}, Request: {'clientcode': 'Svca1072', 'password': '2424', 'totp': '339339'}, Response: HTTPSConnectionPool(host='apiconnect.angelone.in', port=443): Read timed out. (read timeout=7)
+[E 240927 13:31:04 smartConnect:218] Error occurred while making a POST request to https://apiconnect.angelone.in/rest/secure/angelbroking/order/v1/placeOrder. Headers: {'Content-type': 'application/json', 'X-ClientLocalIP': '127.0.0.1', 'X-ClientPublicIP': '106.193.147.98', 'X-MACAddress': '28:d2:44:3b:d3:9d', 'Accept': 'application/json', 'X-PrivateKey': 'TJUyGz6L', 'X-UserType': 'USER', 'X-SourceID': 'WEB', 'Authorization': 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJ1c2VybmFtZSI6IlNWQ0ExMDcyIiwicm9sZXMiOjAsInVzZXJ0eXBlIjoiVVNFUiIsInRva2VuIjoiZXlKaGJHY2lPaUpTVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SjFjMlZ5WDNSNWNHVWlPaUpqYkdsbGJuUWlMQ0owYjJ0bGJsOTBlWEJsSWpvaWRISmhaR1ZmWVdOalpYTnpYM1J2YTJWdUlpd2laMjFmYVdRaU9qRXdNaXdpYzI5MWNtTmxJam9pTXlJc0ltUmxkbWxqWlY5cFpDSTZJbVV3TVRFd01XSmpMVFptTjJRdE0yWmxOaTFpT1RnekxUZG1Zekl6TXpRME5HUmlOeUlzSW10cFpDSTZJblJ5WVdSbFgydGxlVjkyTVNJc0ltOXRibVZ0WVc1aFoyVnlhV1FpT2pFd01pd2ljSEp2WkhWamRITWlPbnNpWkdWdFlYUWlPbnNpYzNSaGRIVnpJam9pWVdOMGFYWmxJbjE5TENKcGMzTWlPaUowY21Ga1pWOXNiMmRwYmw5elpYSjJhV05sSWl3aWMzVmlJam9pVTFaRFFURXdOeklpTENKbGVIQWlPakUzTWpjMU1UZzBNRFVzSW01aVppSTZNVGN5TnpReU16azRNaXdpYVdGMElqb3hOekkzTkRJek9UZ3lMQ0pxZEdraU9pSTRaakZpTnpReVpDMDRNREkwTFRRME4yWXRZamN3T0MwMU1XWTBNbVJrWWpkbVpEa2lmUS5peXdVeVFGbDQtMXktT0hiUHJZMkJWNWJXMlJINkhGTWVzWGVpMWZnTTBGaTczNk5qYkEzY1VYSHFUVXBUNjFKeDNQYzRWVFl1WGhOUjFrVUczR2dBYV9QYVRhX0ptNGdNLXBia3R1Y0F1MDBxRFg1S3VoZjFnTnYwN05NZ3o0UVpkclhZbTBIMWlfRUZTU0NfLVFmRlJmUmk1SGVMWVlvdnB1eGxrTUJ3dkkiLCJBUEktS0VZIjoiVEpVeUd6NkwiLCJpYXQiOjE3Mjc0MjQwNDIsImV4cCI6MTcyNzUxODQwNX0.v-H4zQ_EL5ztj5J9XvGTKnPlJ2CCUBZnSdViOvhzTL2ArDs8b5StQY02fNUQPMxqLBDEIRz2haPSlvxF7nJm4g'}, Request: {'variety': 'NORMAL', 'tradingsymbol': 'SBIN-EQ', 'symboltoken': '3045', 'transactiontype': 'BUY', 'exchange': 'BSC', 'ordertype': 'LIMIT', 'producttype': 'INTRADAY', 'duration': 'DAY', 'price': '800.3', 'squareoff': '0', 'stoploss': '0', 'quantity': '2'}, Response: HTTPSConnectionPool(host='apiconnect.angelone.in', port=443): Read timed out. (read timeout=7)
+[E 240927 13:31:04 views:352] Order placement failed: HTTPSConnectionPool(host='apiconnect.angelone.in', port=443): Read timed out. (read timeout=7)
+    Traceback (most recent call last):
+      File "C:\Users\Admin\AppData\Roaming\Python\Python311\site-packages\urllib3\connectionpool.py", line 466, in _make_request
+        self._validate_conn(conn)
+      File "C:\Users\Admin\AppData\Roaming\Python\Python311\site-packages\urllib3\connectionpool.py", line 1095, in _validate_conn
+        conn.connect()
+      File "C:\Users\Admin\AppData\Roaming\Python\Python311\site-packages\urllib3\connection.py", line 730, in connect
+        sock_and_verified = _ssl_wrap_socket_and_match_hostname(
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      File "C:\Users\Admin\AppData\Roaming\Python\Python311\site-packages\urllib3\connection.py", line 909, in _ssl_wrap_socket_and_match_hostname
+        ssl_sock = ssl_wrap_socket(
+                   ^^^^^^^^^^^^^^^^
+      File "C:\Users\Admin\AppData\Roaming\Python\Python311\site-packages\urllib3\util\ssl_.py", line 469, in ssl_wrap_socket
+        ssl_sock = _ssl_wrap_socket_impl(sock, context, tls_in_tls, server_hostname)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      File "C:\Users\Admin\AppData\Roaming\Python\Python311\site-packages\urllib3\util\ssl_.py", line 513, in _ssl_wrap_socket_impl
+        return ssl_context.wrap_socket(sock, server_hostname=server_hostname)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      File "C:\Program Files\Python311\Lib\ssl.py", line 517, in wrap_socket
+        return self.sslsocket_class._create(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      File "C:\Program Files\Python311\Lib\ssl.py", line 1108, in _create
+        self.do_handshake()
+      File "C:\Program Files\Python311\Lib\ssl.py", line 1379, in do_handshake
+        self._sslobj.do_handshake()
+    TimeoutError: _ssl.c:989: The handshake operation timed out
+    
+    The above exception was the direct cause of the following exception:
+    
+    Traceback (most recent call last):
+      File "C:\Users\Admin\AppData\Roaming\Python\Python311\site-packages\requests\adapters.py", line 667, in send
+        resp = conn.urlopen(
+               ^^^^^^^^^^^^^
+      File "C:\Users\Admin\AppData\Roaming\Python\Python311\site-packages\urllib3\connectionpool.py", line 843, in urlopen
+        retries = retries.increment(
+                  ^^^^^^^^^^^^^^^^^^
+      File "C:\Users\Admin\AppData\Roaming\Python\Python311\site-packages\urllib3\util\retry.py", line 474, in increment
+        raise reraise(type(error), error, _stacktrace)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      File "C:\Users\Admin\AppData\Roaming\Python\Python311\site-packages\urllib3\util\util.py", line 39, in reraise
+        raise value
+      File "C:\Users\Admin\AppData\Roaming\Python\Python311\site-packages\urllib3\connectionpool.py", line 789, in urlopen
+        response = self._make_request(
+                   ^^^^^^^^^^^^^^^^^^^
+      File "C:\Users\Admin\AppData\Roaming\Python\Python311\site-packages\urllib3\connectionpool.py", line 490, in _make_request
+        raise new_e
+      File "C:\Users\Admin\AppData\Roaming\Python\Python311\site-packages\urllib3\connectionpool.py", line 468, in _make_request
+        self._raise_timeout(err=e, url=url, timeout_value=conn.timeout)
+      File "C:\Users\Admin\AppData\Roaming\Python\Python311\site-packages\urllib3\connectionpool.py", line 369, in _raise_timeout
+        raise ReadTimeoutError(
+    urllib3.exceptions.ReadTimeoutError: HTTPSConnectionPool(host='apiconnect.angelone.in', port=443): Read timed out. (read timeout=7)
+    
+    During handling of the above exception, another exception occurred:
+    
+    Traceback (most recent call last):
+      File "E:\Collage\Sem-3\Python\Code\Postman_api_event\Postman_api_event\views.py", line 346, in buyStock
+        orderid = smartApi.placeOrder(orderparams)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      File "C:\Users\Admin\AppData\Roaming\Python\Python311\site-packages\SmartApi\smartConnect.py", line 328, in placeOrder
+        response= self._postRequest("api.order.place", params)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      File "C:\Users\Admin\AppData\Roaming\Python\Python311\site-packages\SmartApi\smartConnect.py", line 260, in _postRequest
+        return self._request(route, "POST", params)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      File "C:\Users\Admin\AppData\Roaming\Python\Python311\site-packages\SmartApi\smartConnect.py", line 219, in _request
+        raise e
+      File "C:\Users\Admin\AppData\Roaming\Python\Python311\site-packages\SmartApi\smartConnect.py", line 207, in _request
+        r = requests.request(method,
+            ^^^^^^^^^^^^^^^^^^^^^^^^
+      File "C:\Users\Admin\AppData\Roaming\Python\Python311\site-packages\requests\api.py", line 59, in request
+        return session.request(method=method, url=url, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      File "C:\Users\Admin\AppData\Roaming\Python\Python311\site-packages\requests\sessions.py", line 589, in request
+        resp = self.send(prep, **send_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      File "C:\Users\Admin\AppData\Roaming\Python\Python311\site-packages\requests\sessions.py", line 703, in send
+        r = adapter.send(request, **kwargs)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      File "C:\Users\Admin\AppData\Roaming\Python\Python311\site-packages\requests\adapters.py", line 713, in send
+        raise ReadTimeout(e, request=request)
+    requests.exceptions.ReadTimeout: HTTPSConnectionPool(host='apiconnect.angelone.in', port=443): Read timed out. (read timeout=7)
+[E 240927 13:33:41 smartConnect:218] Error occurred while making a GET request to https://apiconnect.angelone.in/rest/secure/angelbroking/user/v1/getProfile. Headers: {'Content-type': 'application/json', 'X-ClientLocalIP': '127.0.0.1', 'X-ClientPublicIP': '106.193.147.98', 'X-MACAddress': '28:d2:44:3b:d3:9d', 'Accept': 'application/json', 'X-PrivateKey': 'TJUyGz6L', 'X-UserType': 'USER', 'X-SourceID': 'WEB', 'Authorization': 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJ1c2VybmFtZSI6IlNWQ0ExMDcyIiwicm9sZXMiOjAsInVzZXJ0eXBlIjoiVVNFUiIsInRva2VuIjoiZXlKaGJHY2lPaUpTVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SjFjMlZ5WDNSNWNHVWlPaUpqYkdsbGJuUWlMQ0owYjJ0bGJsOTBlWEJsSWpvaWRISmhaR1ZmWVdOalpYTnpYM1J2YTJWdUlpd2laMjFmYVdRaU9qRXdNaXdpYzI5MWNtTmxJam9pTXlJc0ltUmxkbWxqWlY5cFpDSTZJbVV3TVRFd01XSmpMVFptTjJRdE0yWmxOaTFpT1RnekxUZG1Zekl6TXpRME5HUmlOeUlzSW10cFpDSTZJblJ5WVdSbFgydGxlVjkyTVNJc0ltOXRibVZ0WVc1aFoyVnlhV1FpT2pFd01pd2ljSEp2WkhWamRITWlPbnNpWkdWdFlYUWlPbnNpYzNSaGRIVnpJam9pWVdOMGFYWmxJbjE5TENKcGMzTWlPaUowY21Ga1pWOXNiMmRwYmw5elpYSjJhV05sSWl3aWMzVmlJam9pVTFaRFFURXdOeklpTENKbGVIQWlPakUzTWpjMU1UUTNNamdzSW01aVppSTZNVGN5TnpReU5ERTFNaXdpYVdGMElqb3hOekkzTkRJME1UVXlMQ0pxZEdraU9pSTFZak0xT1dVNVlTMDJabVU1TFRRd1lqa3RPV1JsTmkwME5XWmpNRGcyT0daaE5ETWlmUS5xSjJ2YzY2UmpfU0JFdFZKcnZUTVB3VWUzN1BIdVF6VDhYX0dPN1dkSHNLOUI4VmFjOS04ejFOUDNjMWtTUGY1Z3h3RTBtdlBFRFkyYzh3ejFjMnM3aHVENzVzS3RwQWR3OWh3akdoLXZULU9yWl9ZVjlvQ0dQNV9oTkNjRFZ5NFFLVG5pX1lQVnQyWEI1VGk5TnZzbkZpc2JPMm1qX3VBUmM2ZDNjbWRXa0EiLCJBUEktS0VZIjoiVEpVeUd6NkwiLCJpYXQiOjE3Mjc0MjQyMTIsImV4cCI6MTcyNzUxNDcyOH0.9oejNO22mLADfXy-4qtY360AdP9QgWxE_gjVrxiZJy7wF3Z2wNQYM68Tt2nbDJ1A_ijwlnHKKDyv6dZ31UWMWQ'}, Request: {'refreshToken': 'eyJhbGciOiJIUzUxMiJ9.eyJ0b2tlbiI6IlJFRlJFU0gtVE9LRU4iLCJSRUZSRVNILVRPS0VOIjoiZXlKaGJHY2lPaUpTVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SjFjMlZ5WDNSNWNHVWlPaUpqYkdsbGJuUWlMQ0owYjJ0bGJsOTBlWEJsSWpvaWRISmhaR1ZmY21WbWNtVnphRjkwYjJ0bGJpSXNJbWR0WDJsa0lqb3dMQ0prWlhacFkyVmZhV1FpT2lKbE1ERXhNREZpWXkwMlpqZGtMVE5tWlRZdFlqazRNeTAzWm1NeU16TTBORFJrWWpjaUxDSnJhV1FpT2lKMGNtRmtaVjlyWlhsZmRqRWlMQ0p2Ylc1bGJXRnVZV2RsY21sa0lqb3dMQ0pwYzNNaU9pSnNiMmRwYmw5elpYSjJhV05sSWl3aWMzVmlJam9pVTFaRFFURXdOeklpTENKbGVIQWlPakUzTWpjMU9UY3dNVElzSW01aVppSTZNVGN5TnpReU5ERTFNaXdpYVdGMElqb3hOekkzTkRJME1UVXlMQ0pxZEdraU9pSmtNakZoWVRGbE5pMHdNek5qTFRSbE9ESXRZV0kwWmkwNU56VXlNakkyTlRnNE9UWWlmUS5DdlFnMEN4VjBHWG1weGFiR3VScE95eEJGell6WkpIYTk5dnJCTjR3aUM4UkN4ODRqS2RleUM3dmIyTURTT3h1clhuNF9QMUVDeWlPMno3Um9rd0ZINFNmMWZteTV6SXpDNWVCbmZHM2FBLWZ5NERJTmRfT3BYYWdRdmpjemtvVjRhMEdJOURPU2VubmVuMWdXbmJlUjhGWmM5Tzc2TW4wU0RGbDN1eWpRYk0iLCJpYXQiOjE3Mjc0MjQyMTJ9.d0JPFn_KP60xYCON5v6SvA5L4BquhCTnS1eVb3bfy845kb-9v0kjDJFZT5oN15rKofjAAngG08lC-VYuLcVkLA'}, Response: HTTPSConnectionPool(host='apiconnect.angelone.in', port=443): Read timed out. (read timeout=7)
+[E 240927 13:34:08 smartConnect:218] Error occurred while making a POST request to https://apiconnect.angelone.in/rest/auth/angelbroking/user/v1/loginByPassword. Headers: {'Content-type': 'application/json', 'X-ClientLocalIP': '127.0.0.1', 'X-ClientPublicIP': '106.193.147.98', 'X-MACAddress': '28:d2:44:3b:d3:9d', 'Accept': 'application/json', 'X-PrivateKey': 'TJUyGz6L', 'X-UserType': 'USER', 'X-SourceID': 'WEB'}, Request: {'clientcode': 'Svca1072', 'password': '2424', 'totp': '290237'}, Response: HTTPSConnectionPool(host='apiconnect.angelone.in', port=443): Read timed out. (read timeout=7)
+[E 240927 13:34:18 smartConnect:218] Error occurred while making a POST request to https://apiconnect.angelone.in/rest/auth/angelbroking/user/v1/loginByPassword. Headers: {'Content-type': 'application/json', 'X-ClientLocalIP': '127.0.0.1', 'X-ClientPublicIP': '106.193.147.98', 'X-MACAddress': '28:d2:44:3b:d3:9d', 'Accept': 'application/json', 'X-PrivateKey': 'TJUyGz6L', 'X-UserType': 'USER', 'X-SourceID': 'WEB'}, Request: {'clientcode': 'Svca1072', 'password': '2424', 'totp': '290237'}, Response: HTTPSConnectionPool(host='apiconnect.angelone.in', port=443): Read timed out. (read timeout=7)
+[E 240927 13:35:15 smartConnect:218] Error occurred while making a POST request to https://apiconnect.angelone.in/rest/secure/angelbroking/order/v1/placeOrder. Headers: {'Content-type': 'application/json', 'X-ClientLocalIP': '127.0.0.1', 'X-ClientPublicIP': '106.193.147.98', 'X-MACAddress': '28:d2:44:3b:d3:9d', 'Accept': 'application/json', 'X-PrivateKey': 'TJUyGz6L', 'X-UserType': 'USER', 'X-SourceID': 'WEB', 'Authorization': 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJ1c2VybmFtZSI6IlNWQ0ExMDcyIiwicm9sZXMiOjAsInVzZXJ0eXBlIjoiVVNFUiIsInRva2VuIjoiZXlKaGJHY2lPaUpTVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SjFjMlZ5WDNSNWNHVWlPaUpqYkdsbGJuUWlMQ0owYjJ0bGJsOTBlWEJsSWpvaWRISmhaR1ZmWVdOalpYTnpYM1J2YTJWdUlpd2laMjFmYVdRaU9qRXdNaXdpYzI5MWNtTmxJam9pTXlJc0ltUmxkbWxqWlY5cFpDSTZJbVV3TVRFd01XSmpMVFptTjJRdE0yWmxOaTFpT1RnekxUZG1Zekl6TXpRME5HUmlOeUlzSW10cFpDSTZJblJ5WVdSbFgydGxlVjkyTVNJc0ltOXRibVZ0WVc1aFoyVnlhV1FpT2pFd01pd2ljSEp2WkhWamRITWlPbnNpWkdWdFlYUWlPbnNpYzNSaGRIVnpJam9pWVdOMGFYWmxJbjE5TENKcGMzTWlPaUowY21Ga1pWOXNiMmRwYmw5elpYSjJhV05sSWl3aWMzVmlJam9pVTFaRFFURXdOeklpTENKbGVIQWlPakUzTWpjMU1UZzFPVFFzSW01aVppSTZNVGN5TnpReU5ESXlPU3dpYVdGMElqb3hOekkzTkRJME1qSTVMQ0pxZEdraU9pSmtZbUl5TlRNM01pMWxPRGMyTFRRd01XSXRZakZrWVMwNFpURmhaalEzTTJJd05tRWlmUS5vVjhDMzZHcEpPbVpFbWhrVmRsNWQ0ZFZJSWp6QU93ZjczQmZXLWlCV0Y2NUZ2SEtpSWkwVFkxVmJXa2p6Wmk3Y09nSFRCaGZ5X1RBZUVJVVE1S0FySkZfa29zaXZKVlJ6MU5mbDREQkRzWllLVkZKTXJJRFJtVExEZ2N4aDFERWIxVTFvRDdOY2lORHk5OVVIaGJGRGg3R3laTmJUZXV6cERsWXRvTDRNME0iLCJBUEktS0VZIjoiVEpVeUd6NkwiLCJpYXQiOjE3Mjc0MjQyODksImV4cCI6MTcyNzUxODU5NH0.KxbPNNJ4e6MRk6EEXXY8rIZ_KxAFNshf04hJh2KSxryF33en4saqX_smUVCb0hNMq86FLYDYfdnHEcXRGkG-eA'}, Request: {'variety': 'NORMAL', 'tradingsymbol': 'SBIN-EQ', 'symboltoken': '3045', 'transactiontype': 'BUY', 'exchange': 'NSE', 'ordertype': 'LIMIT', 'producttype': 'INTRADAY', 'duration': 'DAY', 'price': '800.15', 'squareoff': '0', 'stoploss': '0', 'quantity': '6'}, Response: HTTPSConnectionPool(host='apiconnect.angelone.in', port=443): Max retries exceeded with url: /rest/secure/angelbroking/order/v1/placeOrder (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x000001C6403CFB10>, 'Connection to apiconnect.angelone.in timed out. (connect timeout=7)'))
+[E 240927 13:35:15 views:351] Order placement failed: HTTPSConnectionPool(host='apiconnect.angelone.in', port=443): Max retries exceeded with url: /rest/secure/angelbroking/order/v1/placeOrder (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x000001C6403CFB10>, 'Connection to apiconnect.angelone.in timed out. (connect timeout=7)'))
+    Traceback (most recent call last):
+      File "C:\Users\Admin\AppData\Roaming\Python\Python311\site-packages\urllib3\connection.py", line 199, in _new_conn
+        sock = connection.create_connection(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      File "C:\Users\Admin\AppData\Roaming\Python\Python311\site-packages\urllib3\util\connection.py", line 85, in create_connection
+        raise err
+      File "C:\Users\Admin\AppData\Roaming\Python\Python311\site-packages\urllib3\util\connection.py", line 73, in create_connection
+        sock.connect(sa)
+    TimeoutError: timed out
+    
+    The above exception was the direct cause of the following exception:
+    
+    Traceback (most recent call last):
+      File "C:\Users\Admin\AppData\Roaming\Python\Python311\site-packages\urllib3\connectionpool.py", line 789, in urlopen
+        response = self._make_request(
+                   ^^^^^^^^^^^^^^^^^^^
+      File "C:\Users\Admin\AppData\Roaming\Python\Python311\site-packages\urllib3\connectionpool.py", line 490, in _make_request
+        raise new_e
+      File "C:\Users\Admin\AppData\Roaming\Python\Python311\site-packages\urllib3\connectionpool.py", line 466, in _make_request
+        self._validate_conn(conn)
+      File "C:\Users\Admin\AppData\Roaming\Python\Python311\site-packages\urllib3\connectionpool.py", line 1095, in _validate_conn
+        conn.connect()
+      File "C:\Users\Admin\AppData\Roaming\Python\Python311\site-packages\urllib3\connection.py", line 693, in connect
+        self.sock = sock = self._new_conn()
+                           ^^^^^^^^^^^^^^^^
+      File "C:\Users\Admin\AppData\Roaming\Python\Python311\site-packages\urllib3\connection.py", line 208, in _new_conn
+        raise ConnectTimeoutError(
+    urllib3.exceptions.ConnectTimeoutError: (<urllib3.connection.HTTPSConnection object at 0x000001C6403CFB10>, 'Connection to apiconnect.angelone.in timed out. (connect timeout=7)')
+    
+    The above exception was the direct cause of the following exception:
+    
+    Traceback (most recent call last):
+      File "C:\Users\Admin\AppData\Roaming\Python\Python311\site-packages\requests\adapters.py", line 667, in send
+        resp = conn.urlopen(
+               ^^^^^^^^^^^^^
+      File "C:\Users\Admin\AppData\Roaming\Python\Python311\site-packages\urllib3\connectionpool.py", line 843, in urlopen
+        retries = retries.increment(
+                  ^^^^^^^^^^^^^^^^^^
+      File "C:\Users\Admin\AppData\Roaming\Python\Python311\site-packages\urllib3\util\retry.py", line 519, in increment
+        raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='apiconnect.angelone.in', port=443): Max retries exceeded with url: /rest/secure/angelbroking/order/v1/placeOrder (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x000001C6403CFB10>, 'Connection to apiconnect.angelone.in timed out. (connect timeout=7)'))
+    
+    During handling of the above exception, another exception occurred:
+    
+    Traceback (most recent call last):
+      File "E:\Collage\Sem-3\Python\Code\Postman_api_event\Postman_api_event\views.py", line 345, in buyStock
+        orderid = smartApi.placeOrder(orderparams)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      File "C:\Users\Admin\AppData\Roaming\Python\Python311\site-packages\SmartApi\smartConnect.py", line 328, in placeOrder
+        response= self._postRequest("api.order.place", params)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      File "C:\Users\Admin\AppData\Roaming\Python\Python311\site-packages\SmartApi\smartConnect.py", line 260, in _postRequest
+        return self._request(route, "POST", params)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      File "C:\Users\Admin\AppData\Roaming\Python\Python311\site-packages\SmartApi\smartConnect.py", line 219, in _request
+        raise e
+      File "C:\Users\Admin\AppData\Roaming\Python\Python311\site-packages\SmartApi\smartConnect.py", line 207, in _request
+        r = requests.request(method,
+            ^^^^^^^^^^^^^^^^^^^^^^^^
+      File "C:\Users\Admin\AppData\Roaming\Python\Python311\site-packages\requests\api.py", line 59, in request
+        return session.request(method=method, url=url, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      File "C:\Users\Admin\AppData\Roaming\Python\Python311\site-packages\requests\sessions.py", line 589, in request
+        resp = self.send(prep, **send_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      File "C:\Users\Admin\AppData\Roaming\Python\Python311\site-packages\requests\sessions.py", line 703, in send
+        r = adapter.send(request, **kwargs)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      File "C:\Users\Admin\AppData\Roaming\Python\Python311\site-packages\requests\adapters.py", line 688, in send
+        raise ConnectTimeout(e, request=request)
+    requests.exceptions.ConnectTimeout: HTTPSConnectionPool(host='apiconnect.angelone.in', port=443): Max retries exceeded with url: /rest/secure/angelbroking/order/v1/placeOrder (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x000001C6403CFB10>, 'Connection to apiconnect.angelone.in timed out. (connect timeout=7)'))
+[E 240927 14:30:31 smartConnect:218] Error occurred while making a POST request to https://apiconnect.angelone.in/rest/auth/angelbroking/user/v1/loginByPassword. Headers: {'Content-type': 'application/json', 'X-ClientLocalIP': '127.0.0.1', 'X-ClientPublicIP': '106.193.147.98', 'X-MACAddress': '28:d2:44:3b:d3:9d', 'Accept': 'application/json', 'X-PrivateKey': 'TJUyGz6L', 'X-UserType': 'USER', 'X-SourceID': 'WEB'}, Request: {'clientcode': 'Svca1072', 'password': '2424', 'totp': '125244'}, Response: HTTPSConnectionPool(host='apiconnect.angelone.in', port=443): Read timed out. (read timeout=7)
+[E 240927 14:34:03 smartConnect:218] Error occurred while making a POST request to https://apiconnect.angelone.in/rest/auth/angelbroking/user/v1/loginByPassword. Headers: {'Content-type': 'application/json', 'X-ClientLocalIP': '127.0.0.1', 'X-ClientPublicIP': '106.193.147.98', 'X-MACAddress': '28:d2:44:3b:d3:9d', 'Accept': 'application/json', 'X-PrivateKey': 'TJUyGz6L', 'X-UserType': 'USER', 'X-SourceID': 'WEB'}, Request: {'clientcode': 'Svca1072', 'password': '2424', 'totp': '557388'}, Response: HTTPSConnectionPool(host='apiconnect.angelone.in', port=443): Read timed out. (read timeout=7)
