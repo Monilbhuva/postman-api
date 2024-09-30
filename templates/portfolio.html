@@ -7,7 +7,8 @@
             <ul class="nav nav-pills mb-4" role="tablist">
                 <li class="nav-item">
                     <button type="button" class="nav-link active" role="tab" data-bs-toggle="tab"
-                        data-bs-target="#navs-pills-top-position" aria-controls="navs-pills-top-position" aria-selected="true">
+                        data-bs-target="#navs-pills-top-position" aria-controls="navs-pills-top-position"
+                        aria-selected="true">
                         Position
                     </button>
                 </li>
@@ -23,52 +24,108 @@
                 <!-- Position Tab -->
                 <div class="tab-pane fade show active" id="navs-pills-top-position" role="tabpanel">
                     {% if position_data %}
-                        <div class="row">
-                            {% for position in position_data %}
-                                <div class="col-md-4 mb-4">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <h5 class="card-title">{{ position.tradingsymbol }} ({{ position.exchange }})</h5>
-                                            <p>Quantity: {{ position.netqty }}</p>
-                                            <p>Buy Average Price: ₹{{ position.buyavgprice }}</p>
-                                            <p>LTP: ₹{{ position.netprice }}</p>
-                                            <p>Net Value: ₹{{ position.netvalue }}</p>
-                                        </div>
-                                    </div>
+                    <div class="row">
+                        {% for position in position_data %}
+                        <div class="col-md-4 mb-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ position.tradingsymbol }} ({{ position.exchange }})</h5>
+                                    <p>Quantity: {{ position.netqty }}</p>
+                                    <p>Buy Average Price: ₹{{ position.buyavgprice }}</p>
+                                    <p>LTP: ₹{{ position.netprice }}</p>
+                                    <p>Net Value: ₹{{ position.netvalue }}</p>
+                                    <form action="{% url 'sell_order' %}" method="post">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="tradingsymbol" value="{{ position.tradingsymbol }}">
+                                        <input type="hidden" name="symboltoken" value="{{ position.symboltoken }}">
+                                        <input type="hidden" name="ltp" value="{{ position.netprice }}">
+                                        <input type="hidden" name="quantity" value="{{ position.buyqty }}">
+                                        <button type="submit" class="btn btn-danger">Sell</button>
+                                    </form>
                                 </div>
-                            {% endfor %}
+                            </div>
                         </div>
+                        {% endfor %}
+                    </div>
                     {% else %}
-                        <div class="alert alert-warning">
-                            <strong>No position data available at the moment.</strong>
-                        </div>
+                    <div class="alert alert-warning">
+                        <strong>No position data available at the moment.</strong>
+                    </div>
                     {% endif %}
                 </div>
 
                 <!-- Holding Tab -->
                 <div class="tab-pane fade" id="navs-pills-top-holding" role="tabpanel">
                     {% if portfolio_data.status and portfolio_data.data.holdings %}
-                        <div class="row">
-                            {% for holding in portfolio_data.data.holdings %}
-                                <div class="col-md-4 mb-4">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <h5 class="card-title">{{ holding.tradingsymbol }} ({{ holding.exchange }})</h5>
-                                            <p>Quantity: {{ holding.quantity }}</p>
-                                            <p>Average Price: ₹{{ holding.averageprice }}</p>
-                                            <p>LTP: ₹{{ holding.ltp }}</p>
-                                            <p>Profit/Loss: ₹{{ holding.profitandloss }} ({{ holding.pnlpercentage }}%)</p>
-                                        </div>
-                                    </div>
+                    <div class="total-profit-loss">
+                        <h5>Total Holdings Value:
+                            <span class="text-success">
+                                ₹{{ portfolio_data.data.totalholding.totalholdingvalue }}
+                            </span>
+                        </h5>
+                        <h5>Total Profit/Loss:
+                            {% if portfolio_data.data.totalholding.totalprofitandloss >= 0 %}
+                            <span class="text-success">
+                                ₹{{ portfolio_data.data.totalholding.totalprofitandloss }}
+                            </span>
+                            {% else %}
+                            <span class="text-danger">
+                                ₹{{ portfolio_data.data.totalholding.totalprofitandloss }}
+                            </span>
+                            {% endif %}
+                        </h5>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 mb-4">
+                            <h5>Stock Holdings list</h5>
+                        </div>
+                        {% with total_profit_loss=0 total_profit_loss_percentage=0 %}
+                        {% for holding in portfolio_data.data.holdings %}
+                        <div class="col-md-4 mb-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ holding.tradingsymbol }} ({{ holding.exchange }})</h5>
+                                    <p>Quantity: {{ holding.quantity }}</p>
+                                    <p>Average Price: ₹{{ holding.averageprice }}</p>
+                                    <p>LTP: ₹{{ holding.ltp }}</p>
+                                    {% if holding.profitandloss >= 0 %}
+                                    <p class="text-success">
+                                        Profit/Loss: ₹{{ holding.profitandloss }} ({{ holding.pnlpercentage }}%)
+                                    </p>
+                                    {% else %}
+                                    <p class="text-danger">
+                                        Profit/Loss: ₹{{ holding.profitandloss }} ({{ holding.pnlpercentage }}%)
+                                    </p>
+                                    {% endif %}
+                                    <form action="{% url 'sell_order' %}" method="post">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="tradingsymbol" value="{{ holding.tradingsymbol }}">
+                                        <input type="hidden" name="symboltoken" value="{{ holding.symboltoken }}">
+                                        <input type="hidden" name="ltp" value="{{ holding.ltp }}">
+                                        <input type="hidden" name="quantity" value="{{ holding.quantity }}">
+                                        <button type="submit" class="btn btn-danger">Sell</button>
+                                    </form>
                                 </div>
-                            {% endfor %}
+                            </div>
                         </div>
+
+                        {% with total_profit_loss=total_profit_loss|add:holding.profitandloss %}
+                        {% with total_profit_loss_percentage=total_profit_loss_percentage|add:holding.pnlpercentage %}
+                        {% endwith %}
+                        {% endwith %}
+                        {% endfor %}
+                        {% endwith %}
+                    </div>
+
+                   
                     {% else %}
-                        <div class="alert alert-warning">
-                            <strong>No holdings available in your portfolio.</strong> It seems you don't have any stock holdings at the moment.
-                        </div>
+                    <div class="alert alert-warning">
+                        <strong>No holdings available in your portfolio.</strong> It seems you don't have any stock
+                        holdings at the moment.
+                    </div>
                     {% endif %}
                 </div>
+
             </div>
         </div>
     </div>

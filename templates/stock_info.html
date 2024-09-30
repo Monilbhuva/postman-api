@@ -50,6 +50,20 @@
 {% endblock %}
 {% block content %}
 {% load humanize %} <!-- Load humanize template tags -->
+<div class="col-md-12 col-12 mb-4">
+    <div class="card">
+        <div class="card-header d-flex align-items-center justify-content-between">
+            <div>
+                <h5 class="card-title mb-1">{{ stock_data.tradingSymbol }}</h5>
+                <p class="text-muted mb-0">₹{{ stock_data.ltp }}</p>
+            </div>
+        </div>
+        <div class="card-body">
+            <div id="candleStickChart"></div>
+        </div>
+    </div>
+</div>
+
 <div class="container stock-info-container">
     <div class="stock-header text-center">
         <h3>Stock Quote Information</h3>
@@ -226,6 +240,9 @@
 {% endblock %}
 
 {% block script %}
+
+<script src="/static/js/apexcharts.js"></script>
+<script src="/static/js/typeahead.js"></script>
 <script>
     $(document).ready(function () {
         $('#buyStockForm').on('submit', function (e) {
@@ -263,5 +280,124 @@
             });
         });
     });
+
+    const candlestickEl = document.querySelector('#candleStickChart');
+
+    // Define variables (labelColor, borderColor, and config.colors)
+    const labelColor = '#6e6b7b';
+    const borderColor = '#f0f0f0';
+    const config = {
+        colors: {
+            success: '#28a745',  // Green color for upward
+            danger: '#dc3545'    // Red color for downward
+        }
+    };
+
+    // Parse the passed candle_data from Django context
+    const formattedCandleData = {{ candle_data| safe }};
+
+    const candlestickChartConfig = {
+        chart: {
+            height: 410,
+            type: 'candlestick',
+            parentHeightOffset: 0,
+            toolbar: {
+                show: true,
+                tools: {
+                    zoom: true,
+                    zoomin: true,
+                    zoomout: true,
+                    pan: true,
+                    reset: true
+                },
+                autoSelected: 'zoom'
+            },
+            zoom: {
+                enabled: true,
+                type: 'xy',  // Enable zoom on both X and Y axes
+                autoScaleYaxis: true
+            },
+            animations: {
+                enabled: false  // Disable animations to optimize for large datasets
+            },
+            pan: {
+                enabled: true,
+                mode: 'xy',  // Allow panning on both axes
+                resetIcon: {
+                    offsetX: 0,
+                    offsetY: 0,
+                }
+            }
+        },
+        series: [
+            {
+                data: formattedCandleData
+            }
+        ],
+        xaxis: {
+            type: 'datetime',
+            axisBorder: {
+                show: false
+            },
+            axisTicks: {
+                show: false
+            },
+            labels: {
+                style: {
+                    colors: labelColor,
+                    fontSize: '13px'
+                },
+                datetimeFormatter: {
+                    hour: 'HH:mm'
+                }
+            },
+            tooltip: {
+                enabled: true
+            }
+        },
+        yaxis: {
+            tooltip: {
+                enabled: true
+            },
+            labels: {
+                style: {
+                    colors: labelColor,
+                    fontSize: '13px'
+                }
+            }
+        },
+        grid: {
+            borderColor: borderColor,
+            xaxis: {
+                lines: {
+                    show: true
+                }
+            },
+            padding: {
+                top: -20
+            }
+        },
+        plotOptions: {
+            candlestick: {
+                colors: {
+                    upward: config.colors.success,
+                    downward: config.colors.danger
+                }
+            }
+        },
+        responsive: [{
+            breakpoint: 1000,
+            options: {
+                chart: {
+                    height: 300
+                },
+            }
+        }]
+    };
+
+    if (typeof candlestickEl !== undefined && candlestickEl !== null) {
+        const candlestickChart = new ApexCharts(candlestickEl, candlestickChartConfig);
+        candlestickChart.render();
+    }
 </script>
 {% endblock %}

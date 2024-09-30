@@ -12,6 +12,7 @@ from http.client import HTTPSConnection
 from homepage_stock_list.models import Homepage_stock_list
 import mimetypes
 from django.http import JsonResponse
+from datetime import datetime, timedelta  
 
 
 
@@ -60,18 +61,6 @@ headers = {
 conn = http.client.HTTPSConnection("apiconnect.angelone.in")  # Replace with actual URL
 
 
-# def login(request):
-#     if request.method == 'POST':
-#         clientcode = request.POST.get('clientcode')
-#         password = request.POST.get('password')
-#         if clientcode and password:
-#             if clientcode == username and password == pwd:
-#                 # return HttpResponse('Login Successfully')
-#                 return render(request, 'login.html')
-#             else:
-#                 return render(request, 'login.html', {'error' : 'You enter wrong cradential'})
-#         else:
-#             return render(request, 'login.html', {'error' : 'enter the clientcode and password'})
                 
 
 def index(request):
@@ -189,14 +178,14 @@ def stock_search(request):
     stock_data = None
 
     if query:
-        # Make a request to the Angel API (use the appropriate endpoint)
+
         payload = json.dumps({
             "mode": "FULL",
             "exchangeTokens": {
                 "NSE": [query]  # Using the query directly; ensure it's valid
             }
         })
-  
+
         conn.request("POST", "/rest/secure/angelbroking/market/v1/quote/", payload, headers)
         res = conn.getresponse()
         data2 = res.read().decode('utf-8')  # Decode the byte response to a string
@@ -209,9 +198,52 @@ def stock_search(request):
         # Add these calculations to the context
         stock_data['difference'] = difference
         stock_data['percentage_change'] = percentage_change
+        # Make a request to the Angel API (use the appropriate endpoint)
+      
+  
+        # Get the current date and time
+        now = datetime.now()  # Correct usage of datetime.now()
+
+        # Calculate `fromdate` which is current time minus one day (yesterday at the same time)
+        fromdate = (now - timedelta(days=1)).strftime('%Y-%m-%d %H:%M')
+
+        # Format the current `todate` as the current time in the required format
+        todate = now.strftime('%Y-%m-%d %H:%M')
+
+        # Prepare the payload for the API request
+        payload1 = json.dumps({
+            "exchange": "NSE",  # Ensure this is correct for your use case
+            "symboltoken": query,  # Correct symbol token
+            "interval": "FIVE_MINUTE",  # Correct interval
+            "fromdate": fromdate,  # From 1 day before the current time
+            "todate": todate  # Current time
+        })
+
+        # API call to fetch candlestick data
+        conn.request("POST", "/rest/secure/angelbroking/historical/v1/getCandleData", payload1, headers)
+        res1 = conn.getresponse()
+        dataCandel = res1.read()
+        finalData = dataCandel.decode("utf-8")
+        
+        # Parse the JSON data
+        data_dict = json.loads(finalData)
+        candle_data = data_dict.get("data", [])
+        
+        # Format data for ApexCharts
+        formatted_data = [
+            {
+                "x": datetime.strptime(data[0], "%Y-%m-%dT%H:%M:%S%z").timestamp() * 1000,  # Unix timestamp in milliseconds
+                "y": [data[1], data[2], data[3], data[4]]  # [Open, High, Low, Close]
+            }
+            for data in candle_data
+        ]
+        # Pass the data to the template
+
+
+       
         try:
             if stock_data:
-                return render(request, 'stock_info.html', {'stock_data': stock_data})
+                return render(request, 'stock_info.html', {'stock_data': stock_data, 'candle_data': json.dumps(formatted_data)})
             
         except Exception as e:
             logger.exception(f"Order placement failed: {e}")
@@ -244,9 +276,47 @@ def stock_search_detail(request, symboltoken):
         stock_data['difference'] = difference
         stock_data['percentage_change'] = percentage_change
 
+
+
+        # Get the current date and time
+        now = datetime.now()  # Correct usage of datetime.now()
+
+        # Calculate `fromdate` which is current time minus one day (yesterday at the same time)
+        fromdate = (now - timedelta(days=1)).strftime('%Y-%m-%d %H:%M')
+
+        # Format the current `todate` as the current time in the required format
+        todate = now.strftime('%Y-%m-%d %H:%M')
+
+        # Prepare the payload for the API request
+        payload1 = json.dumps({
+            "exchange": "NSE",  # Ensure this is correct for your use case
+            "symboltoken": symboltoken,  # Correct symbol token
+            "interval": "THREE_MINUTE",  # Correct interval
+            "fromdate": fromdate,  # From 1 day before the current time
+            "todate": todate  # Current time
+        })
+
+        # API call to fetch candlestick data
+        conn.request("POST", "/rest/secure/angelbroking/historical/v1/getCandleData", payload1, headers)
+        res1 = conn.getresponse()
+        dataCandel = res1.read()
+        finalData = dataCandel.decode("utf-8")
+
+        data_dict = json.loads(finalData)
+        candle_data = data_dict.get("data", [])
+        
+        # Format data for ApexCharts
+        formatted_data = [
+            {
+                "x": datetime.strptime(data[0], "%Y-%m-%dT%H:%M:%S%z").timestamp() * 1000,  # Unix timestamp in milliseconds
+                "y": [data[1], data[2], data[3], data[4]]  # [Open, High, Low, Close]
+            }
+            for data in candle_data
+        ]
+
         try:
             if stock_data:
-                return render(request, 'stock_info.html', {'stock_data': stock_data})
+                return render(request, 'stock_info.html', {'stock_data': stock_data, 'candle_data': json.dumps(formatted_data)})
             
         except Exception as e:
             logger.exception(f"Order placement failed: {e}")
@@ -271,21 +341,6 @@ def addWatchlist(request):
         # Handle the case where parameters are missing
         return HttpResponse("Invalid data, could not add to watchlist.")
     
-
-# def getStockLTP(request):
-#     conn = http.client.HTTPSConnection(
-#         "apiconnect.angelone.in"
-#         )
-#     payload = "{\n \"exchange\": \"NSE\",\n \"tradingsymbol\": \"SBIN-EQ\",\n \"symboltoken\": \"3045\"\n}"
-   
-#     conn.request("POST", "/order-service/rest/secure/angelbroking/order/v1/getLtpData", payload, headers)
-
-#     res = conn.getresponse()
-#     dataLtp = res.read()
-#     print(dataLtp.decode("utf-8"))
-
-#     return HttpResponse("it is call",dataLtp)
-
 
 
 def getStockLTP(request):
@@ -388,7 +443,6 @@ def portfolio(request):
         'portfolio_data': holdings_data,  # Portfolio holdings data
         'position_data': positions_data.get('data', [])  # Positions data as a list
     }
-
     return render(request, 'portfolio.html', context)
 
 
@@ -424,7 +478,75 @@ def get_order_book(request):
         'canceled_orders': canceled_orders,
         'executed_orders': executed_orders
     }
-    
+
     return render(request, 'orderbook.html', context)
 
 
+def candel(request):
+
+    payload = "{\r\n     \"exchange\": \"NSE\",\r\n\"symboltoken\": \"3045\",\r\n     \"interval\":\"ONE_MINUTE\",\r\n  \"fromdate\": \"2024-09-29 09:15\",\r\n \"todate\": \"2024-09-30 15:16\"\r\n}"
+
+    # API call to fetch candlestick data
+    conn.request("POST", "/rest/secure/angelbroking/historical/v1/getCandleData", payload, headers)
+    res = conn.getresponse()
+    dataCandel = res.read()
+    finalData = dataCandel.decode("utf-8")
+    
+    # Parse the JSON data
+    data_dict = json.loads(finalData)
+    candle_data = data_dict.get("data", [])
+    
+    # Format data for ApexCharts
+    formatted_data = [
+        {
+            "x": datetime.strptime(data[0], "%Y-%m-%dT%H:%M:%S%z").timestamp() * 1000,  # Unix timestamp in milliseconds
+            "y": [data[1], data[2], data[3], data[4]]  # [Open, High, Low, Close]
+        }
+        for data in candle_data
+    ]
+    print(formatted_data)
+    # Pass the data to the template
+    return render(request, 'candle_chart copy.html', {'candle_data': json.dumps(formatted_data)})
+
+
+def sell_order(request):
+
+    if request.method == 'POST':
+        # Fetch form data from request
+        # exchange = request.POST.get('exchange')
+        quantity = request.POST.get('quantity')
+        tradingSymbol = request.POST.get('tradingSymbol')
+        symbolToken = request.POST.get('symbolToken')
+        price = request.POST.get('ltp')
+        # productType = request.POST.get('productType')
+
+  
+
+        # Prepare order parameters dynamically using form data
+        orderparams = {
+            "variety": "NORMAL",
+            "tradingsymbol": tradingSymbol,  # from form
+            "symboltoken": symbolToken,      # from form
+            "transactiontype": "SELL",
+            "exchange": "NSE",            # from form (NSE/BSE)
+            "ordertype": "LIMIT",
+            "producttype": "INTRADAY",
+            "duration": "DAY",
+            "price": price,                  # Update this dynamically if needed
+            "squareoff": "0",
+            "stoploss": "0",
+            "quantity": quantity             # from form
+        }
+
+        # Try to place the order
+        try:
+            # Place the order and get the order ID
+            orderid = smartApi.placeOrder(orderparams)
+            logger.info(f"PlaceOrder : {orderid}")
+            return redirect('portfolio')
+
+        except Exception as e:
+            logger.exception(f"Order Sell failed: {e}")
+            return JsonResponse({'success': False, 'error': str(e)})
+    else:
+        return JsonResponse({'success': False, 'error': 'Invalid request method'})

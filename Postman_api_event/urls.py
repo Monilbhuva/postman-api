@@ -21,7 +21,7 @@ from Postman_api_event import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     # path('login/', views.login, name='login'),
-    path('index/', views.index, name='index'),
+    path('', views.index, name='index'),
     path('demo/', views.demo),
     path('profile/', views.profile),
     path('stock/search/', views.stock_search, name='stock_search'),
@@ -33,5 +33,7 @@ urlpatterns = [
     path('buyStock', views.buyStock, name='buyStock'),
     path('portfolio/', views.portfolio, name='portfolio'),
     path('orderbook/', views.get_order_book, name='orderbook'),
+    path('candel/', views.candel, name='candel'),
+    path('sell_order/', views.sell_order, name='sell_order'),
 
 ]
