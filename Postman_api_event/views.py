@@ -68,6 +68,7 @@ def index(request):
     context = {
         'watchList': list(watch_list_data),  # Convert QuerySet to list of dictionaries
     }
+
     return render(request, 'index.html', context)
 
 def demo(request):
